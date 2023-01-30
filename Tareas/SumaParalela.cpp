@@ -1,5 +1,12 @@
+// Computo en la nube
+//23.01.23
+//Emmanuel González Calitl A01320739
+//Este código realiza la suma de dos arreglos de manera paralela
+//Código fuente para ser compilado y ejecutado desde: https://www.codingame.com/playgrounds/54443/openmp/playground debido a falta de entorno de desarrollo en Visual Studio.
 
-//#include "pch.h"
+
+
+//#include "pch.h"      
 #include <iostream>
 #include <omp.h>
 
@@ -15,6 +22,7 @@ int main()
     float a[N], b[N], c[N];
     int i;
 
+    // Generación o petición de la información para llenar los arreglos:
     for (i = 0; i < N; i++)
     {
         a[i] = i * 10;
@@ -26,9 +34,11 @@ int main()
             shared (a, b, c, pedazos) private(i)\
             schedule(static, pedazos)
 
+            // Uso correcto del for paralelo:
             for (i = 0; i < N; i++)
                     c[i] = a[i] + b[i];
 
+    // Impresión de los elementos de cada arreglo:
     std::cout << "Imprimiendo los primeros " << mostrar << " valores del arreglo a: " << std::endl; 
     imprimeArreglo(a);
     std::cout << "Imprimiendo los primeros " << mostrar << " valores del arreglo b: " << std::endl; 
@@ -37,6 +47,7 @@ int main()
     imprimeArreglo(c);
 }
 
+// Función para la impresión de los elementos de cada arreglo 
 void imprimeArreglo (float *d)
 {
     for (int x = 0; x < mostrar; x++)
